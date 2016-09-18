@@ -6,10 +6,10 @@ require 'fantasyCompare/version'
 Gem::Specification.new do |spec|
   spec.name          = "fantasyCompare"
   spec.version       = FantasyCompare::VERSION
-  spec.authors       = ["TODO: Write your name"]
+  spec.authors       = ["John Verdone"]
   spec.email         = ["jmverdone@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
+  spec.summary       = %q{Compares fantasy players stats in a CLI}
   spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
