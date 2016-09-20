@@ -3,7 +3,7 @@ require 'pry'
 
 
 class NFLJSON
-  attr_accessor :position, :url
+  attr_accessor :position
 
   #take a url with variables to get proper JSON data
   def self.url(position)
@@ -24,14 +24,14 @@ def self.inputs
   else
     @position = positions[pos_input]
   end
-
+  self.url(@position)
+  self.players(@url)
 end
 
 def self.players(url)
   ###move out
   response = HTTParty.get(url)
   test = response.parsed_response
-
   players = []
   test["players"].each do |key, value|
     weekProjectedPts = key["weekProjectedPts"]
