@@ -6,10 +6,12 @@ class NFLJSON
   attr_accessor :position
 
   #take a url with variables to get proper JSON data
-  def self.url(position)
+  def self.url(position, week)
     @url =  "http://api.fantasy.nfl.com/v1/players/stats?statType=weekStats&season=2016&week=1&position=#{position}&format=json&returnHTML=1"
   end
-
+    urler =  "http://api.fantasy.nfl.com/v1/players/stats?statType=weekStats&season=2016&week=1&position=QB&format=json&returnHTML=1"
+  response = HTTParty.get(urler)
+  tester = response.parsed_response
 
 
 # Takes input to parse proper JSON Position data by returing proper url link
@@ -36,7 +38,8 @@ def self.players(url)
   test["players"].each do |key, value|
     weekProjectedPts = key["weekProjectedPts"]
     name = key["name"]
-    players << {name: name, weekProjectedPts: weekProjectedPts}
+    playerId = key["id"]
+    players << {name: name, weekProjectedPts: weekProjectedPts, playerId: playerId}
   end
   players
 end
