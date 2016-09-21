@@ -3,7 +3,7 @@ require 'pry'
 
 
 class NFLJSON
-  attr_accessor :position, :week, :players
+  attr_accessor :position, :week, :players, :list
 
 
   #take a url with variables to get proper JSON data
@@ -27,6 +27,7 @@ def self.inputs
     @week = gets.chomp
   self.url(@position, @week)
   self.players(@url)
+
 end
 
 #generates simplefied list of parsed down data from API
@@ -44,11 +45,18 @@ def self.players(url)
   @players
 end
 
-  #take the parsed players hash array, sorts it and returns the top 10 projected players
+  #take the parsed players hash array, sorts it and returns the top 10 projected players in text format
  def self.top_ten_list(players)
-   @top_ten = []
-   @top_ten << players.sort_by {|key| key[:weekProjectedPts]}.reverse!.first(10)
- end
 
+   @list = []
+   @top_ten = players.sort_by {|key| key[:weekProjectedPts]}.first(10)
+   #parse into strings
+   @top_ten.collect do |key, value|
+
+      binding.pry
+
+   end
+   @list
+ end
   binding.pry
 end
