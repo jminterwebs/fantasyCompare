@@ -33,9 +33,9 @@ end
 def self.players(url)
   ###move out
   response = HTTParty.get(url)
-  test = response.parsed_response
+  players_hash = response.parsed_response
   @players = []
-  test["players"].each do |key, value|
+  players_hash["players"].each do |key, value|
     weekProjectedPts = key["weekProjectedPts"]
     name = key["name"]
     playerId = key["id"]
@@ -48,7 +48,6 @@ end
  def self.top_ten_list(players)
    @top_ten = []
    @top_ten << players.sort_by {|key| key[:weekProjectedPts]}.reverse!.first(10)
-
  end
 
   binding.pry
