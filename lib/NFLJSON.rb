@@ -52,8 +52,9 @@ end
    @top_ten = players.sort_by {|key| key[:weekProjectedPts]}.first(10)
    #parse into strings
    @top_ten.collect do |key, value|
-
-      binding.pry
+     name = key[:name]
+     projected = key[:weekProjectedPts]
+     @list << "Name: #{name} Projected Points: #{projected}"
 
    end
    @list
