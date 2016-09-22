@@ -31,6 +31,9 @@ def self.inputs
     puts "Please select a team to find out more info"
   self.list(@list)
     @info = gets.chomp
+  self.detail_player_view(@info)
+    puts "Information for this team is as follows"
+    puts "Name #{@playerName}: Projected Points: #{@projectedPoints} Id: #{@playerId}"
 end
 
 #generates simplefied list of parsed down data from API
@@ -50,7 +53,6 @@ end
 
   #take the parsed players hash array, sorts it and returns the top 10 projected players in text format
  def self.top_ten_list(players)
-
    @list = []
    @top_ten = players.sort_by {|key| key[:weekProjectedPts]}.reverse!.first(10)
    #parse into strings
@@ -61,12 +63,20 @@ end
    end
  end
 
+# parses info into numbered list
 def self.list(list)
   list.each_with_index do |value, index|
     puts "#{index +1}: #{value}"
   end
 end
 
+#obtain detail veiw of player
+def self.detail_player_view(info)
+  info = info.to_i - 1
+  @playerId = @top_ten[info][:playerId]
+  @playerName = @top_ten[info][:name]
+  @projectedPoints = @top_ten[info][:weekProjectedPts]
+end
 
   binding.pry
 end
