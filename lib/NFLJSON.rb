@@ -3,15 +3,28 @@ require 'pry'
 
 
 class NFLJSON
-  attr_accessor :position, :week, :players, :list, :info
+  attr_accessor :position, :week, :players, :players_hash, :list, :info, :detail_hash
 
 
-  #take a url with variables to get proper JSON data
+  #modifies url to pull proper JSON data
   def self.url(position, week)
-    @url =  "http://api.fantasy.nfl.com/v1/players/stats?statType=weekProjectedStats&season=2016&week=#{week}&position=#{position}&format=json&returnHTML=1"
+    url =  "http://api.fantasy.nfl.com/v1/players/stats?statType=weekProjectedStats&season=2016&week=#{week}&position=#{position}&format=json&returnHTML=1"
+    response = HTTParty.get(url)
+    @players_hash = response.parsed_response
+
   end
 
+  #modifies url to pull proper JSON data based on user inputs and returns a hashed result
+  def self.detail_url(id)
+      detail_url = "http://api.fantasy.nfl.com/v1/players/details?playerId=#{id}&statType=seasonStatsformat=json"
+      response = HTTParty.get(detail_url)
+      @detail_hash = response.parsed_response
+  end
+
+
+
 # Takes input to parse proper JSON Position data by returing proper url link
+# Mai CLI functionality
 def self.inputs
   positions = ["QB","RB","WR","TE","K","DEF"]
   puts "Please pick a position (1-6) \n1.QB\n2.RB\n3.WR\n4.Te\n5.K\n6.DEF"
@@ -26,23 +39,21 @@ def self.inputs
     puts "Please select a week for stats"
     @week = gets.chomp
   self.url(@position, @week)
-  self.players(@url)
+  self.players
   self.top_ten_list(@players)
     puts "Please select a team to find out more info"
   self.list(@list)
     @info = gets.chomp
   self.detail_player_view(@info)
     puts "Information for this team is as follows"
-    puts "Name #{@playerName}: Projected Points: #{@projectedPoints} Id: #{@playerId}"
+  self.detail_url(@playerId)
 end
 
 #generates simplefied list of parsed down data from API
-def self.players(url)
-  ###move out
-  response = HTTParty.get(url)
-  players_hash = response.parsed_response
+def self.players
+
   @players = []
-  players_hash["players"].each do |key, value|
+  @players_hash["players"].each do |key, value|
     weekProjectedPts = key["weekProjectedPts"]
     name = key["name"]
     playerId = key["id"]
@@ -76,6 +87,10 @@ def self.detail_player_view(info)
   @playerId = @top_ten[info][:playerId]
   @playerName = @top_ten[info][:name]
   @projectedPoints = @top_ten[info][:weekProjectedPts]
+end
+
+def self.show_detail_veiw
+  @detail_hash
 end
 
   binding.pry
