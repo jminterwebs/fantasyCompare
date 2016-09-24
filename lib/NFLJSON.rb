@@ -3,7 +3,7 @@ require 'pry'
 
 
 class NFLJSON
-  attr_accessor :position, :week, :players, :players_hash, :list, :info, :detail_hash
+  attr_accessor :position, :week, :players, :players_hash, :list, :info, :detail
 
 
   #modifies url to pull proper JSON data
@@ -47,6 +47,11 @@ def self.inputs
   self.detail_player_view(@info)
     puts "Information for this team is as follows"
   self.detail_url(@playerId)
+  self.show_detail_veiw
+    puts @detail
+    puts "\nWould you like to see additional notes (Y/N)?"
+  addtional_notes = gets.chomp
+  self.next_note(addtional_notes)
 end
 
 #generates simplefied list of parsed down data from API
@@ -89,8 +94,28 @@ def self.detail_player_view(info)
   @projectedPoints = @top_ten[info][:weekProjectedPts]
 end
 
+#parses @detail_hash into readable info
 def self.show_detail_veiw
-  @detail_hash
+  @detail_hash["players"].each do |key, value|
+    note = []
+    status =  key["status"]
+    injury = key["injuryGameStatus"] || "None"
+
+    key["notes"].each do |key, value|
+
+      note << "Date: #{key["timestamp"]}\n #{key["body"] + key["analysis"]}"
+    end
+    binding.pry
+    @detail = "Status: #{status} \nInjury Status: #{injury} \n #{note.first}"
+  end
+
+  def self.next_note(addtional_notes)
+    if addtional_notes[0].capitalize == "Y"
+      note[1]
+    end
+    binding.pry
+  end
+
 end
 
   binding.pry
