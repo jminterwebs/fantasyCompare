@@ -94,7 +94,9 @@ class FantasyCompare::NFLJSON
     end
 
     if do_again[0].capitalize == "Y"
-      self.inputs
+      FantasyCompare::CLI.new.call
+    else
+      puts "Goodbye"
     end
   end
 end
