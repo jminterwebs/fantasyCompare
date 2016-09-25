@@ -1,4 +1,5 @@
 class FantasyCompare::CLI
+  attr_accessor :list
 
   def call
     inputs
@@ -19,16 +20,16 @@ class FantasyCompare::CLI
     end
       puts "Please select a week for stats"
       @week = gets.chomp
-    self.url(@position, @week)
-    self.players
-    self.top_ten_list(@players)
+    FantasyCompare::NFLJSON.url(@position, @week)
+    FantasyCompare::NFLJSON.players
       puts "Please select a team to find out more info"
-    self.list(@list)
+    FantasyCompare::NFLJSON.list
       @info = gets.chomp
-    self.detail_player_view(@info)
+    FantasyCompare::NFLJSON.detail_player_view(@info)
       puts "Information for this team is as follows"
-    self.detail_url(@playerId)
-    self.show_detail_veiw
+    FantasyCompare::NFLJSON.detail_url
+    puts FantasyCompare::NFLJSON.show_detail_veiw
       puts @detail
-    self.next_note(1) #increments notes
+    FantasyCompare::NFLJSON.next_note(1) #increments notes
   end
+end

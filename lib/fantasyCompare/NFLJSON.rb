@@ -10,11 +10,12 @@ class FantasyCompare::NFLJSON
     url = "http://api.fantasy.nfl.com/v1/players/stats?statType=weekProjectedStats&season=2016&week=#{week}&position=#{position}&format=json&returnHTML=1"
     response = HTTParty.get(url)
     @players_hash = response.parsed_response
+
   end
 
     #modifies url to pull proper JSON data based on user inputs and returns a hashed result
-  def self.detail_url(id)
-    detail_url = "http://api.fantasy.nfl.com/v1/players/details?playerId=#{id}&statType=seasonStatsformat=json"
+  def self.detail_url
+    detail_url = "http://api.fantasy.nfl.com/v1/players/details?playerId=#{@playerId}&statType=seasonStatsformat=json"
     response = HTTParty.get(detail_url)
     @detail_hash = response.parsed_response
   end
@@ -29,7 +30,7 @@ class FantasyCompare::NFLJSON
       playerId = key["id"]
       @players << {name: name, weekProjectedPts: weekProjectedPts, playerId: playerId}
     end
-    @players
+      self.top_ten_list(@players)
   end
 
     #take the parsed players hash array, sorts it and returns the top 10 projected players in text format
@@ -45,8 +46,8 @@ class FantasyCompare::NFLJSON
   end
 
   # parses info into numbered list
-  def self.list(list)
-    list.each_with_index do |value, index|
+  def self.list
+    @list.each_with_index do |value, index|
       puts "#{index + 1}: #{value}"
     end
   end
@@ -72,6 +73,7 @@ class FantasyCompare::NFLJSON
       end
     end
     @detail = "Status: #{status} \nInjury Status: #{injury} \n #{@note.first}"
+
   end
 
   #used to display addtional notes
@@ -94,9 +96,5 @@ class FantasyCompare::NFLJSON
     if do_again[0].capitalize == "Y"
       self.inputs
     end
-
   end
-
-
-  binding.pry
 end
