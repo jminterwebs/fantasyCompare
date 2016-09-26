@@ -72,27 +72,34 @@ class FantasyCompare::NFLJSON
       @note << "Date: #{key["timestamp"]}\n #{key["body"] + key["analysis"]}"
       end
     end
-    @detail = "Status: #{status} \nInjury Status: #{injury} \n #{@note.first}"
-
+    @detail = "Status: #{status} \nInjury Status: #{injury}\n"
   end
 
   #used to display addtional notes
-  def self.next_note(note_number)
-    puts "\nWould you like to see additional notes (Y/N)?"
-    addtional_notes = gets.chomp
-    if addtional_notes[0].capitalize == "Y" && note_number <= @note.length-1
-      puts @note[note_number]
-      note_number += 1
-      self.next_note(note_number)
-    elsif note_number > @note.length-1 && addtional_notes[0].capitalize == "Y"
-      puts "There are no more notes"
-      puts "Would You like to see details on another player(Y/N)?"
-      do_again = gets.chomp
-    elsif addtional_notes[0].capitalize == "N"
-      puts "Would You like to see details on another position(Y/N)?"
-      do_again = gets.chomp
-    elsif do_again[0].capitalize == "Y"
-      FantasyCompare::CLI.new.call
+  def self.next_note
+    addtional_notes = "Y"
+    note_number = 1
+
+    while note_number < @note.length - 1  && addtional_notes[0].capitalize == "Y"
+        puts @note[note_number]
+        note_number += 1
+
+        if note_number >= @note.length-1
+          puts "\nThere are no more notes"
+          puts "\nWould you like to see additional positions (Y/N)?"
+          FantasyCompare::CLI.new.call if gets.chomp[0].capitalize == "Y"
+          addtional_notes = "N"
+        else
+          puts "\nWould you like to see additional notes (Y/N)?"
+          addtional_notes = gets.chomp
+
+          if addtional_notes[0].capitalize == "N"
+            puts "\nWould you like to see additional positions (Y/N)?"
+            FantasyCompare::CLI.new.call if gets.chomp[0].capitalize == "Y"
+          end
+        end
     end
+
   end
+
 end

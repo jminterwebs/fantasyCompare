@@ -18,7 +18,7 @@ class FantasyCompare::CLI
     else
       @position = positions[pos_input]
     end
-      puts "Please select a week for stats"
+      puts "Please select a week for stats (1-17)"
       @week = gets.chomp
     FantasyCompare::NFLJSON.url(@position, @week)
     FantasyCompare::NFLJSON.players
@@ -29,8 +29,7 @@ class FantasyCompare::CLI
       puts "Information for this team is as follows"
     FantasyCompare::NFLJSON.detail_url
     puts FantasyCompare::NFLJSON.show_detail_veiw
-      puts @detail
-    FantasyCompare::NFLJSON.next_note(1) #increments notes
-    puts "Goodbye"
+    FantasyCompare::NFLJSON.next_note
+
   end
 end
