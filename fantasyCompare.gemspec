@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.email         = ["jmverdone@gmail.com"]
 
   spec.summary       = %q{Compares fantasy players stats in a CLI}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.description   = %q{A console Gem that pulls API data from the NFLs fantasy api. It then lets a user select a positon and week. After displaying the top ten players, a player can be selected to see a more detailed view of the given player}
+  spec.homepage      = "https://github.com/jminterwebs/fantasyCompare"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
