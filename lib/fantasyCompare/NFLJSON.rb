@@ -86,17 +86,13 @@ class FantasyCompare::NFLJSON
       self.next_note(note_number)
     elsif note_number > @note.length-1 && addtional_notes[0].capitalize == "Y"
       puts "There are no more notes"
-      puts "Would You like to see details on another player?"
+      puts "Would You like to see details on another player(Y/N)?"
       do_again = gets.chomp
     elsif addtional_notes[0].capitalize == "N"
-      puts "Would You like to see details on another position?"
+      puts "Would You like to see details on another position(Y/N)?"
       do_again = gets.chomp
-    end
-
-    if do_again[0].capitalize == "Y"
+    elsif do_again[0].capitalize == "Y"
       FantasyCompare::CLI.new.call
-    else
-      puts "Goodbye"
     end
   end
 end

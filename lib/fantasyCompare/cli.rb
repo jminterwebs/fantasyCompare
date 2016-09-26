@@ -31,5 +31,6 @@ class FantasyCompare::CLI
     puts FantasyCompare::NFLJSON.show_detail_veiw
       puts @detail
     FantasyCompare::NFLJSON.next_note(1) #increments notes
+    puts "Goodbye"
   end
 end
