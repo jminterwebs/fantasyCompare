@@ -22,7 +22,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Gem runs in a console where it first displays a list of fantasy football positions. The console then asks the user for an input(1-6) to pick a valid position and a fantasy football week. The console then displays a list of the 10 ten players for that position and their project points for the selected week. The console then asks the user to pick a player for a more detailed view of that player.
+
+In the detail view the players status is displayed and the most recent note for that player. The console then ask's if an additional note should be displayed. If yes is selected notes can be displayed until there are no more. If no is selected or if there are no more notes the console finally asks if details for another position should be displayed. A yes input will start the program over and no input will exit. 
 
 ## Development
 
@@ -38,4 +40,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-

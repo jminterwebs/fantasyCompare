@@ -89,7 +89,7 @@ class FantasyCompare::NFLJSON
       puts "Would You like to see details on another player?"
       do_again = gets.chomp
     elsif addtional_notes[0].capitalize == "N"
-      puts "Would You like to see details on another player?"
+      puts "Would You like to see details on another position?"
       do_again = gets.chomp
     end
 
