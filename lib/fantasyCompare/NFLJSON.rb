@@ -10,7 +10,6 @@ class FantasyCompare::NFLJSON
     url = "http://api.fantasy.nfl.com/v1/players/stats?statType=weekProjectedStats&season=2016&week=#{week}&position=#{position}&format=json&returnHTML=1"
     response = HTTParty.get(url)
     @players_hash = response.parsed_response
-
   end
 
     #modifies url to pull proper JSON data based on user inputs and returns a hashed result
