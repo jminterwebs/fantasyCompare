@@ -54,6 +54,7 @@ class FantasyCompare::NFLJSON
 
   #obtain detail veiw of player
   def self.detail_player_view(info)
+    info -= 1
     @playerId = @top_ten[info][:playerId]
     @playerName = @top_ten[info][:name]
     @projectedPoints = @top_ten[info][:weekProjectedPts]

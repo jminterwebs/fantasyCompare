@@ -48,7 +48,7 @@ class FantasyCompare::CLI
     #Validate input
     while !info.between?(1,10)
       puts "Invalid Input\n"
-      puts "Please select a team to find out more info (1-10)\n\n"
+      puts "Please select a player to find out more info (1-10)\n\n"
     FantasyCompare::NFLJSON.list
     info = gets.chomp
     info = info.to_i
