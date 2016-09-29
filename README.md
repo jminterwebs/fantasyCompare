@@ -18,6 +18,10 @@ Or install it yourself as:
 
     $ gem install fantasyCompare
 
+Run from terminal with:
+
+    fantasy-compare 
+
 ## Usage
 
 Gem runs in a console where it first displays a list of fantasy football positions. The console then asks the user for an input(1-6) to pick a valid position and a fantasy football week. The console then displays a list of the 10 ten players for that position and their project points for the selected week. The console then asks the user to pick a player for a more detailed view of that player.
